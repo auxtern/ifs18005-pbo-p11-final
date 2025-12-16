@@ -37,7 +37,7 @@ jobs:
 
       - name: Copy and configure application.properties
         run: |
-          cp src/main/resources/application.properties.template src/main/resources/application.properties
+          cp src/main/resources/application.properties.example src/main/resources/application.properties
           sed -i 's|spring.datasource.username=.*|spring.datasource.username=postgres|g' src/main/resources/application.properties
           sed -i 's|spring.datasource.password=.*|spring.datasource.password=postgres|g' src/main/resources/application.properties
 

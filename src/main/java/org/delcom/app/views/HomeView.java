@@ -1,7 +1,9 @@
 package org.delcom.app.views;
 
+import org.delcom.app.dto.CashFlowForm;
 import org.delcom.app.dto.TodoForm;
 import org.delcom.app.entities.User;
+import org.delcom.app.services.CashFlowService;
 import org.delcom.app.services.TodoService;
 import org.delcom.app.utils.ConstUtil;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeView {
 
     private final TodoService todoService;
+    private final CashFlowService cashFlowService;
 
-    public HomeView(TodoService todoService) {
+    public HomeView(TodoService todoService, CashFlowService cashFlowService) {
         this.todoService = todoService;
+        this.cashFlowService = cashFlowService;
     }
 
     @GetMapping
@@ -41,6 +45,13 @@ public class HomeView {
 
         // Todo Form
         model.addAttribute("todoForm", new TodoForm());
+
+        // Cash flows
+        var cashFlows = cashFlowService.getAllCashFlows(authUser.getId(), "");
+        model.addAttribute("cashFlows", cashFlows);
+
+        // Cash flows form
+        model.addAttribute("cashFlowForm", new CashFlowForm());
 
         return ConstUtil.TEMPLATE_PAGES_HOME;
     }

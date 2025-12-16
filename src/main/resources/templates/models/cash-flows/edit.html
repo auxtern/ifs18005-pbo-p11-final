@@ -1,0 +1,122 @@
+<div th:fragment="editCashFlowModal">
+  <form
+    th:action="@{/cash-flows/edit}"
+    method="post"
+    th:object="${cashFlowForm}"
+  >
+    <div class="modal fade" id="editCashFlowModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Ubah Cash Flow</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <!-- Hidden: ID CashFlow -->
+            <input id="editCashFlowId" type="hidden" th:field="*{id}" />
+
+            <!-- Type -->
+            <div class="mb-3">
+              <label for="editCashFlowType" class="form-label">Type</label>
+              <select
+                id="editCashFlowType"
+                class="form-select"
+                th:field="*{type}"
+              >
+                <option value="Income">Income</option>
+                <option value="Outcome">Outcome</option>
+              </select>
+              <div
+                class="text-danger"
+                th:if="${#fields.hasErrors('type')}"
+                th:errors="*{type}"
+              ></div>
+            </div>
+
+            <!-- Source -->
+            <div class="mb-3">
+              <label for="editCashFlowSource" class="form-label">Source</label>
+              <input
+                id="editCashFlowSource"
+                type="text"
+                class="form-control"
+                th:field="*{source}"
+              />
+              <div
+                class="text-danger"
+                th:if="${#fields.hasErrors('source')}"
+                th:errors="*{source}"
+              ></div>
+            </div>
+
+            <!-- Label -->
+            <div class="mb-3">
+              <label for="editCashFlowLabel" class="form-label">Label</label>
+              <input
+                id="editCashFlowLabel"
+                type="text"
+                class="form-control"
+                th:field="*{label}"
+              />
+              <div
+                class="text-danger"
+                th:if="${#fields.hasErrors('label')}"
+                th:errors="*{label}"
+              ></div>
+            </div>
+
+            <!-- Amount -->
+            <div class="mb-3">
+              <label for="editCashFlowAmount" class="form-label">Amount</label>
+              <input
+                id="editCashFlowAmount"
+                type="number"
+                class="form-control"
+                th:field="*{amount}"
+              />
+              <div
+                class="text-danger"
+                th:if="${#fields.hasErrors('amount')}"
+                th:errors="*{amount}"
+              ></div>
+            </div>
+
+            <!-- Deskripsi -->
+            <div class="mb-3">
+              <label for="editCashFlowDescription" class="form-label"
+                >Deskripsi</label
+              >
+              <textarea
+                class="form-control"
+                rows="4"
+                th:field="*{description}"
+                id="editCashFlowDescription"
+              ></textarea>
+              <small
+                class="text-danger"
+                th:if="${#fields.hasErrors('description')}"
+                th:errors="*{description}"
+              ></small>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Batal
+            </button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
